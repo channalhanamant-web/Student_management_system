@@ -1,4 +1,4 @@
-package com.Student_Management_System.OOP;
+package com.student.management.system.oop;
 
 import java.util.Objects;
 
