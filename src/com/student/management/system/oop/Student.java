@@ -291,6 +291,44 @@ public class Student extends Person {
 			return false;
 		}
 	}
+	
+	public boolean updateInformation(String newContactNumber) {
+		System.out.println("Requesting for parents approval");
+		boolean parentApprovalStatus = parentApproval();
+		if (parentApprovalStatus) {
+			if (super.updateInformation(newContactNumber)) {
+
+				System.out.println("Notifying the parents");
+				return true;
+			}else {
+				System.err.println("Details invalid");
+				return false;
+			}
+		}
+		else {
+			System.err.println("No approval from parents");
+			return false;
+		}
+	}
+	
+	public boolean updateInformation(String newAddress, boolean update) {
+		System.out.println("Requesting for parents approval");
+		boolean parentApprovalStatus = parentApproval();
+		if (parentApprovalStatus) {
+			if (super.updateInformation(newAddress,update)) {
+
+				System.out.println("Notifying the parents");
+				return true;
+			}else {
+				System.err.println("Details invalid");
+				return false;
+			}
+		}
+		else {
+			System.err.println("No approval from parents");
+			return false;
+		}
+	}
 
 	public boolean parentApproval() {
 		return true;

@@ -204,6 +204,44 @@ public class Teacher extends Person {
 
 		}
 	}
+	
+	protected boolean updateInformation(String newContactNumber) {
+		System.out.println("Notifying HR for Approval");
+		boolean hrApprovalStatus = getHRApproval();
+		if (hrApprovalStatus) {
+			System.out.println("Details Approved by HR");
+			if (super.updateInformation(newContactNumber)) {
+
+				System.out.println("New information added");
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			System.err.println("Details not approved by HR");
+			return false;
+
+		}
+	}
+	
+	protected boolean updateInformation(String newAddress, boolean update) {
+		System.out.println("Notifying HR for Approval");
+		boolean hrApprovalStatus = getHRApproval();
+		if (hrApprovalStatus) {
+			System.out.println("Details Approved by HR");
+			if (super.updateInformation(newAddress,update)) {
+
+				System.out.println("New information added");
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			System.err.println("Details not approved by HR");
+			return false;
+
+		}
+	}
 
 	private boolean getHRApproval() {
 		return true;

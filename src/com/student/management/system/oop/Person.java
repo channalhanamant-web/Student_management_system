@@ -77,20 +77,41 @@ public class Person {
 
 	protected boolean updateInformation(String newContactNumber, String newAddress) {
 		if (validateContactNumber(newContactNumber) && validateAddress(newAddress)) {
-			
-			this.contactNumber=newContactNumber;
-			this.address=newAddress;
+
+			this.contactNumber = newContactNumber;
+			this.address = newAddress;
 			System.out.println("Updating contact number and address information");
 			return true;
-		}
-		else {
+		} else {
 			System.err.println("Trying to add invalid information");
 			return false;
 		}
-		
+
+	}
+
+	protected boolean updateInformation(String newContactNumber) {
+		if (validateContactNumber(newContactNumber)) {
+			this.contactNumber = newContactNumber;
+			System.out.println("New number added");
+			return true;
+		} else {
+			System.err.println("Invalid contact number");
+			return false;
+		}
 	}
 	
+	protected boolean updateInformation(String newAddress, boolean update) {
+		if (validateAddress(newAddress)) {
+			this.address = newAddress;
+			System.out.println("New address added");
+			return true;
+		} else {
+			System.err.println("Invalid address");
+			return false;
+		}
+	}
 	
+
 	@Override
 	public String toString() {
 		return "Person [name=" + name + ", age=" + age + ", contactNumber=" + contactNumber + ", address=" + address

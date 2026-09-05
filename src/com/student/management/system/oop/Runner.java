@@ -3,19 +3,21 @@ package com.student.management.system.oop;
 public class Runner {
 
 	public static void main(String[] args) {
-		Person s1 = new Student("Uday", 10, 15, 95, 96, 99, "7348971359", " #BHSP C 2");//upcasting
+		Person s1 = new Student("Uday", 10, 15, 95, 96, 99, "7348971359", " #BHSP C 2");// upcasting
 
-		((Student) s1).calculateTotalmarks(); //downcasting
+		((Student) s1).calculateTotalmarks(); // downcasting
 		((Student) s1).calculatePercentage();
 		((Student) s1).calculateGrade();
 		((Student) s1).displayStudentInformation();
 		s1.updateInformation("7348971360", "Mumbai");
-		((Student) s1).displayStudentInformation(); 
+		s1.updateInformation("7348971380");
+		((Student) s1).displayStudentInformation();
 
 		Person t1 = new Teacher("Harsha", 25, "7348971359", "#BHSP C 3", "T101", "English", 5);
-		((Teacher)t1).displayTeacherDetails();
+		((Teacher) t1).displayTeacherDetails();
 		t1.updateInformation("9876543210", "Bengaluru");
-		((Teacher)t1).displayTeacherDetails();
+		t1.updateInformation("7348971380");
+		((Teacher) t1).displayTeacherDetails();
 
 	}
 
