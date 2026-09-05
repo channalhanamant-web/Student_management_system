@@ -2,13 +2,9 @@ package com.student.management.system.oop;
 
 import java.util.Objects;
 
-public class Student {
+public class Student extends Person {
 
-	private String studentName;
-	private int studentAge;
 	private int studentRoll;
-	private String phoneNumber;
-	private String address;
 	private double marksObtainedInEnglish;
 	private double marksObtainedInScience;
 	private double marksObtainedInMaths;
@@ -16,47 +12,46 @@ public class Student {
 	private double percentage;
 	private String studentGrade;
 
-	public Student(String studentName, int studentAge, int studentRoll, double marksObtainedInEnglish,
-			double marksObtainedInScience, double marksObtainedInMaths, String phoneNumber, String address) {
+	public Student(String name, int age, int studentRoll, double marksObtainedInEnglish, double marksObtainedInScience,
+			double marksObtainedInMaths, String contactNumber, String address) {
+		super(name, age, contactNumber, address);
 
-		if (validateAge(studentAge) && validateRollNumber(studentRoll) && validateMarks(marksObtainedInEnglish)
+		if (validateAge(age) && validateRollNumber(studentRoll) && validateMarks(marksObtainedInEnglish)
 				&& validateMarks(marksObtainedInMaths) && validateMarks(marksObtainedInScience)
-				&& validatePhoneNumber(phoneNumber) && validateAddress(address)) {
-			this.studentName = studentName;
-			this.studentAge = studentAge;
+				&& validatePhoneNumber(contactNumber) && validateAddress(address)) {
+
 			this.studentRoll = studentRoll;
 			this.marksObtainedInEnglish = marksObtainedInEnglish;
 			this.marksObtainedInScience = marksObtainedInScience;
 			this.marksObtainedInMaths = marksObtainedInMaths;
-			this.phoneNumber = phoneNumber;
-			this.address = address;
+
 		}
 
 	}
 
 	public String getStudentName() {
-		return studentName;
+		return name;
 	}
 
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
+	public void setStudentName(String name) {
+		this.name = name;
 	}
 
 	public int getStudentAge() {
-		return studentAge;
+		return age;
 	}
 
 	public void setStudentAge(int studentAge) {
 		if (studentAge < 21 && studentAge >= 10) {
-			this.studentAge = studentAge;
+			this.age = studentAge;
 		} else {
 			System.out.println("Invalid age");
 		}
 
 	}
 
-	public boolean validateAge(int studentAge) {
-		if (studentAge < 21 && studentAge >= 10) {
+	public boolean validateAge(int age) {
+		if (age < 21 && age >= 10) {
 			return true;
 		} else {
 			System.err.println("Invalid age");
@@ -151,11 +146,11 @@ public class Student {
 	}
 
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return contactNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
 
 	}
 
@@ -224,8 +219,8 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [studentName=" + studentName + ", studentAge=" + studentAge + ", studentRoll=" + studentRoll
-				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", marksObtainedInEnglish="
+		return "Student [studentName=" + name + ", studentAge=" + age + ", studentRoll=" + studentRoll
+				+ ", phoneNumber=" + contactNumber + ", address=" + address + ", marksObtainedInEnglish="
 				+ marksObtainedInEnglish + ", marksObtainedInScience=" + marksObtainedInScience
 				+ ", marksObtainedInMaths=" + marksObtainedInMaths + ", totalMarks=" + totalMarks + ", percentage="
 				+ percentage + ", studentGrade=" + studentGrade + "]";
@@ -234,7 +229,7 @@ public class Student {
 	@Override
 	public int hashCode() {
 		return Objects.hash(address, marksObtainedInEnglish, marksObtainedInMaths, marksObtainedInScience, percentage,
-				phoneNumber, studentAge, studentGrade, studentName, studentRoll, totalMarks);
+				contactNumber, age, studentGrade, name, studentRoll, totalMarks);
 	}
 
 	@Override
@@ -253,31 +248,52 @@ public class Student {
 				&& Double.doubleToLongBits(marksObtainedInScience) == Double
 						.doubleToLongBits(other.marksObtainedInScience)
 				&& Double.doubleToLongBits(percentage) == Double.doubleToLongBits(other.percentage)
-				&& Objects.equals(phoneNumber, other.phoneNumber) && studentAge == other.studentAge
-				&& Objects.equals(studentGrade, other.studentGrade) && Objects.equals(studentName, other.studentName)
+				&& Objects.equals(contactNumber, other.contactNumber) && age == other.age
+				&& Objects.equals(studentGrade, other.studentGrade) && Objects.equals(name, other.name)
 				&& studentRoll == other.studentRoll
 				&& Double.doubleToLongBits(totalMarks) == Double.doubleToLongBits(other.totalMarks);
 	}
-	
+
 	public void displayStudentInformation() {
-		
+
 		System.out.println("------- Student Information -------");
-		System.out.println("Name: "+studentName);
-		System.out.println("Age: "+studentAge);
-		System.out.println("Roll Number: "+studentRoll);
-		System.out.println("Contact number: "+ phoneNumber);
-		System.out.println("Address: "+ address);
-		System.out.println("Marks in English: "+marksObtainedInEnglish);
-		System.out.println("Marks in Maths: "+ marksObtainedInMaths);
-		System.out.println("Marks in Science: "+ marksObtainedInScience);
-		System.out.println("Total marks obtained: "+totalMarks);
-		System.out.println("Percentage obtained: "+ percentage+"%");
-		System.out.println("Grade: "+ studentGrade);
-		
+		System.out.println("Name: " + name);
+		System.out.println("Age: " + age);
+		System.out.println("Roll Number: " + studentRoll);
+		System.out.println("Contact number: " + contactNumber);
+		System.out.println("Address: " + address);
+		System.out.println("Marks in English: " + marksObtainedInEnglish);
+		System.out.println("Marks in Maths: " + marksObtainedInMaths);
+		System.out.println("Marks in Science: " + marksObtainedInScience);
+		System.out.println("Total marks obtained: " + totalMarks);
+		System.out.println("Percentage obtained: " + percentage + "%");
+		System.out.println("Grade: " + studentGrade);
+
 		System.out.println("--------------------------------------------------");
-		
-		
-		
+
+	}
+
+	public boolean updateInformation(String newContactNumber, String newAddress) {
+		System.out.println("Requesting for parents approval");
+		boolean parentApprovalStatus = parentApproval();
+		if (parentApprovalStatus) {
+			if (super.updateInformation(newContactNumber, newAddress)) {
+
+				System.out.println("Notifying the parents");
+				return true;
+			}else {
+				System.err.println("Details invalid");
+				return false;
+			}
+		}
+		else {
+			System.err.println("No approval from parents");
+			return false;
+		}
+	}
+
+	public boolean parentApproval() {
+		return true;
 	}
 
 }

@@ -1,11 +1,7 @@
 package com.student.management.system.oop;
 
-public class Teacher {
+public class Teacher extends Person {
 
-	private String name;
-	private int age;
-	private String contactNumber;
-	private String address;
 	private String employeeId;
 	private String subject;
 	private int yearsOfExperience;
@@ -15,13 +11,11 @@ public class Teacher {
 
 	public Teacher(String name, int age, String contactNumber, String address, String employeeId, String subject,
 			int yearsOfExperience) {
+		super(name, age, contactNumber, address);
 
 		if (validateAge(age) && validateContactNumber(contactNumber) && validateAddres(address)
 				&& validateEmployeeId(employeeId) && validateSubject(subject) && validateYOE(yearsOfExperience)) {
-			this.name = name;
-			this.age = age;
-			this.contactNumber = contactNumber;
-			this.address = address;
+
 			this.employeeId = employeeId;
 			this.subject = subject;
 			this.yearsOfExperience = yearsOfExperience;
@@ -170,19 +164,18 @@ public class Teacher {
 		salary = BASE_SALARY + (yearsOfExperience * EXPERIENCE_BONUS);
 
 	}
-	
+
 	public void displayTeacherDetails() {
 		System.out.println("---------- Teacher Information ---------");
-		System.out.println("Name: "+name);
-		System.out.println("Employee ID: "+employeeId);
-		System.out.println("Age: "+age);
-		System.out.println("Contact number: "+contactNumber);
-		System.out.println("Address: "+address);
-		System.out.println("Teaching subject: "+subject);
-		System.out.println("Year of experience: "+yearsOfExperience);
-		System.out.println("Salary: "+"$"+salary);
-		
-		
+		System.out.println("Name: " + name);
+		System.out.println("Employee ID: " + employeeId);
+		System.out.println("Age: " + age);
+		System.out.println("Contact number: " + contactNumber);
+		System.out.println("Address: " + address);
+		System.out.println("Teaching subject: " + subject);
+		System.out.println("Year of experience: " + yearsOfExperience);
+		System.out.println("Salary: " + "$" + salary);
+
 	}
 
 	@Override
@@ -191,7 +184,29 @@ public class Teacher {
 				+ ", employeeId=" + employeeId + ", subject=" + subject + ", yearsOfExperience=" + yearsOfExperience
 				+ ", salary=" + salary + "]";
 	}
-	
-	
+
+
+	protected boolean updateInformation(String newContactNumber, String newAddress) {
+		System.out.println("Notifying HR for Approval");
+		boolean hrApprovalStatus = getHRApproval();
+		if (hrApprovalStatus) {
+			System.out.println("Details Approved by HR");
+			if (super.updateInformation(newContactNumber, newAddress)) {
+
+				System.out.println("New information added");
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			System.err.println("Details not approved by HR");
+			return false;
+
+		}
+	}
+
+	private boolean getHRApproval() {
+		return true;
+	}
 
 }
