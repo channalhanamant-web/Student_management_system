@@ -8,7 +8,7 @@ public class Person {
 	protected String address;
 	private static int personCounter=0;
 
-	public Person(String name, int age, String contactNumber, String address) {
+	public Person(String name, int age,String address, String contactNumber) {
 		super();
 		if (validateAddress(address) && validateContactNumber(contactNumber)) {
 			
