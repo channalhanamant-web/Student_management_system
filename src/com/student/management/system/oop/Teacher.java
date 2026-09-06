@@ -6,6 +6,7 @@ public class Teacher extends Person {
 	private String subject;
 	private int yearsOfExperience;
 	private double salary;
+	private static int teacherCount=0;
 	private static final double BASE_SALARY = 30000;
 	private static final double EXPERIENCE_BONUS = 2000;
 
@@ -19,6 +20,7 @@ public class Teacher extends Person {
 			this.employeeId = employeeId;
 			this.subject = subject;
 			this.yearsOfExperience = yearsOfExperience;
+			teacherCount++;
 			calculateSalary();
 		}
 
@@ -245,6 +247,10 @@ public class Teacher extends Person {
 
 	private boolean getHRApproval() {
 		return true;
+	}
+	
+	public static int getTotalTeacherCount() {
+		return teacherCount;
 	}
 
 }

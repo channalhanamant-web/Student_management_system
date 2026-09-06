@@ -11,6 +11,7 @@ public class Student extends Person {
 	private double totalMarks;
 	private double percentage;
 	private String studentGrade;
+	private static int studentCount=0;
 
 	public Student(String name, int age, int studentRoll, double marksObtainedInEnglish, double marksObtainedInScience,
 			double marksObtainedInMaths, String contactNumber, String address) {
@@ -24,6 +25,7 @@ public class Student extends Person {
 			this.marksObtainedInEnglish = marksObtainedInEnglish;
 			this.marksObtainedInScience = marksObtainedInScience;
 			this.marksObtainedInMaths = marksObtainedInMaths;
+			studentCount++;
 
 		}
 
@@ -333,5 +335,29 @@ public class Student extends Person {
 	public boolean parentApproval() {
 		return true;
 	}
+	
+	
+	public static int getTotalStudentCount() {
+		return studentCount;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

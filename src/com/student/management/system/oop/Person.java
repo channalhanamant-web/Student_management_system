@@ -6,14 +6,18 @@ public class Person {
 	protected int age;
 	protected String contactNumber;
 	protected String address;
+	private static int personCounter=0;
 
 	public Person(String name, int age, String contactNumber, String address) {
 		super();
 		if (validateAddress(address) && validateContactNumber(contactNumber)) {
+			
 			this.name = name;
 			this.age = age;
 			this.contactNumber = contactNumber;
 			this.address = address;
+			personCounter++;
+			
 		}
 
 	}
@@ -109,6 +113,12 @@ public class Person {
 			System.err.println("Invalid address");
 			return false;
 		}
+	}
+	
+	public static int getTotalPersonCount() {
+		
+		return personCounter;
+		
 	}
 	
 
