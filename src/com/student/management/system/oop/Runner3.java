@@ -7,7 +7,12 @@ public class Runner3 {
 				.withMarksObtainedInEnglish(89).withMarksObtainedInMaths(78).withMarksObtainedInScience(78)
 				.withRollNumber(21).build();
 		System.out.println(s1);
+
+		Student s2 = new SportsStudent.SportsStudentBuilder("Raj", 15, "Bombay", "7412589630").withSportsScore(90)
+				.withRollNumber(21).withMarksObtainedInEnglish(89).withMarksObtainedInMaths(89)
+				.withMarksObtainedInScience(89).withMarksObtainedInScience(69).build();
+		System.out.println(s2);
+
 	}
-Student s2= new SportsStudent.SportsStudentBuilder("Kohli", 18, "Delhi", "1234567890").withRollNumber(19).withMarksObtainedInEnglish(78).withMarksObtainedInMaths(78).withMarksObtainedInScience(89).with
-	
+
 }

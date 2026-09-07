@@ -8,9 +8,9 @@ public abstract class Student extends Person {
 	private final double marksObtainedInEnglish;
 	private final double marksObtainedInScience;
 	private final double marksObtainedInMaths;
-	protected final double totalMarks;
-	private final double percentage;
-	private final String studentGrade;
+	protected double totalMarks;
+	protected double percentage;
+	protected String studentGrade;
 	private static int studentCount = 0;
 
 	protected Student(StudentBuilder studentBuilder) {
@@ -20,8 +20,7 @@ public abstract class Student extends Person {
 		this.marksObtainedInScience = studentBuilder.marksObtainedInScience;
 		this.marksObtainedInMaths = studentBuilder.marksObtainedInMaths;
 		totalMarks = calculateTotalmarks();
-		percentage = calculatePercentage();
-		studentGrade = calculateGrade();
+		
 		studentCount++;
 	}
 

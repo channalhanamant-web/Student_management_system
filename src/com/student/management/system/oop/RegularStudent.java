@@ -5,6 +5,9 @@ public class RegularStudent extends Student {
 	protected RegularStudent(StudentBuilder studentBuilder) {
 		super(studentBuilder);
 
+		percentage = calculatePercentage();
+		studentGrade = calculateGrade();
+
 	}
 
 	@Override
