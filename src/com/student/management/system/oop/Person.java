@@ -1,23 +1,23 @@
 package com.student.management.system.oop;
 
-public class Person {
+public abstract class Person {
 
 	protected String name;
 	protected int age;
 	protected String contactNumber;
 	protected String address;
-	private static int personCounter=0;
+	private static int personCounter = 0;
 
-	public Person(String name, int age,String address, String contactNumber) {
+	public Person(String name, int age, String address, String contactNumber) {
 		super();
 		if (validateAddress(address) && validateContactNumber(contactNumber)) {
-			
+
 			this.name = name;
 			this.age = age;
 			this.contactNumber = contactNumber;
 			this.address = address;
 			personCounter++;
-			
+
 		}
 
 	}
@@ -103,7 +103,7 @@ public class Person {
 			return false;
 		}
 	}
-	
+
 	protected boolean updateInformation(String newAddress, boolean update) {
 		if (validateAddress(newAddress)) {
 			this.address = newAddress;
@@ -114,13 +114,12 @@ public class Person {
 			return false;
 		}
 	}
-	
+
 	public static int getTotalPersonCount() {
-		
+
 		return personCounter;
-		
+
 	}
-	
 
 	@Override
 	public String toString() {

@@ -1,12 +1,12 @@
 package com.student.management.system.oop;
 
-public class Teacher extends Person {
+public final class Teacher extends Person {
 
 	private String employeeId;
 	private String subject;
 	private int yearsOfExperience;
 	private double salary;
-	private static int teacherCount=0;
+	private static int teacherCount = 0;
 	private static final double BASE_SALARY = 30000;
 	private static final double EXPERIENCE_BONUS = 2000;
 
@@ -128,13 +128,6 @@ public class Teacher extends Person {
 		return employeeId;
 	}
 
-	public void setEmployeeId(String employeeId) {
-		if (validateEmployeeId(employeeId)) {
-			this.employeeId = employeeId;
-		}
-
-	}
-
 	public String getSubject() {
 		return subject;
 	}
@@ -161,7 +154,7 @@ public class Teacher extends Person {
 		return salary;
 	}
 
-	private void calculateSalary() {
+	protected final void calculateSalary() {
 
 		salary = BASE_SALARY + (yearsOfExperience * EXPERIENCE_BONUS);
 
@@ -187,7 +180,6 @@ public class Teacher extends Person {
 				+ ", salary=" + salary + "]";
 	}
 
-
 	protected boolean updateInformation(String newContactNumber, String newAddress) {
 		System.out.println("Notifying HR for Approval");
 		boolean hrApprovalStatus = getHRApproval();
@@ -206,7 +198,7 @@ public class Teacher extends Person {
 
 		}
 	}
-	
+
 	protected boolean updateInformation(String newContactNumber) {
 		System.out.println("Notifying HR for Approval");
 		boolean hrApprovalStatus = getHRApproval();
@@ -225,13 +217,13 @@ public class Teacher extends Person {
 
 		}
 	}
-	
+
 	protected boolean updateInformation(String newAddress, boolean update) {
 		System.out.println("Notifying HR for Approval");
 		boolean hrApprovalStatus = getHRApproval();
 		if (hrApprovalStatus) {
 			System.out.println("Details Approved by HR");
-			if (super.updateInformation(newAddress,update)) {
+			if (super.updateInformation(newAddress, update)) {
 
 				System.out.println("New information added");
 				return true;
@@ -248,7 +240,7 @@ public class Teacher extends Person {
 	private boolean getHRApproval() {
 		return true;
 	}
-	
+
 	public static int getTotalTeacherCount() {
 		return teacherCount;
 	}

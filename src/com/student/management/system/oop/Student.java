@@ -2,36 +2,18 @@ package com.student.management.system.oop;
 
 import java.util.Objects;
 
-public class Student extends Person {
+public abstract class Student extends Person {
 
 	private final int studentRoll;
 	private final double marksObtainedInEnglish;
 	private final double marksObtainedInScience;
 	private final double marksObtainedInMaths;
-	private final double totalMarks;
+	protected final double totalMarks;
 	private final double percentage;
 	private final String studentGrade;
 	private static int studentCount = 0;
 
-//	public Student(String name, int age, int studentRoll, double marksObtainedInEnglish, double marksObtainedInScience,
-//			double marksObtainedInMaths, String contactNumber, String address) {
-//		super(name, age, contactNumber, address);
-//
-//		if (validateAge(age) && validateRollNumber(studentRoll) && validateMarks(marksObtainedInEnglish)
-//				&& validateMarks(marksObtainedInMaths) && validateMarks(marksObtainedInScience)
-//				&& validatePhoneNumber(contactNumber) && validateAddress(address)) {
-//
-//			this.studentRoll = studentRoll;
-//			this.marksObtainedInEnglish = marksObtainedInEnglish;
-//			this.marksObtainedInScience = marksObtainedInScience;
-//			this.marksObtainedInMaths = marksObtainedInMaths;
-//			studentCount++;
-//
-//		}
-//
-//	}
-
-	public Student(StudentBuilder studentBuilder) {
+	protected Student(StudentBuilder studentBuilder) {
 		super(studentBuilder.name, studentBuilder.age, studentBuilder.address, studentBuilder.contactNumber);
 		this.studentRoll = studentBuilder.studentRoll;
 		this.marksObtainedInEnglish = studentBuilder.marksObtainedInEnglish;
@@ -120,18 +102,15 @@ public class Student extends Person {
 		this.address = address;
 	}
 
-	public double calculateTotalmarks() {
+	public final double calculateTotalmarks() {
 
 		double totalMarks = marksObtainedInEnglish + marksObtainedInScience + marksObtainedInMaths;
 		return totalMarks;
 	}
 
-	public double calculatePercentage() {
-		double percentage = totalMarks / 3;
-		return percentage;
-	}
+	public abstract double calculatePercentage();
 
-	public String calculateGrade() {
+	public final String calculateGrade() {
 		String studentGrade;
 		if (percentage == 0) {
 			studentGrade = "Grade cannot be calculated";
@@ -262,7 +241,7 @@ public class Student extends Person {
 		return studentCount;
 	}
 
-	public static class StudentBuilder {
+	public static abstract class StudentBuilder {
 //mandatory
 		private String name;
 		private int age;
@@ -286,7 +265,7 @@ public class Student extends Person {
 			}
 		}
 
-		public boolean validateAge(int age) {
+		private boolean validateAge(int age) {
 			if (age < 21 && age >= 10) {
 				return true;
 			} else {
@@ -295,7 +274,7 @@ public class Student extends Person {
 			}
 		}
 
-		public boolean validatePhoneNumber(String contactNumber) {
+		private boolean validatePhoneNumber(String contactNumber) {
 			if (contactNumber != null && contactNumber.matches("\\d{10}")) {
 				return true;
 			} else {
@@ -304,12 +283,24 @@ public class Student extends Person {
 			}
 		}
 
-		public boolean validateAddress(String address) {
+		private boolean validateAddress(String address) {
 			if (address.isBlank()) {
 				System.err.println("Invalid address");
 				return false;
 			} else {
 				return true;
+			}
+
+		}
+
+		private boolean validateRollNumber(int studentRoll) {
+
+			if (studentRoll >= 1 && studentRoll <= 100) {
+				return true;
+
+			} else {
+				System.err.println("Invalid roll number");
+				return false;
 			}
 
 		}
@@ -334,22 +325,7 @@ public class Student extends Person {
 			return this;
 		}
 
-		public Student build() {
-			Student student = new Student(this);
-			return student;
-		}
-
-		public boolean validateRollNumber(int studentRoll) {
-
-			if (studentRoll >= 1 && studentRoll <= 100) {
-				return true;
-
-			} else {
-				System.err.println("Invalid roll number");
-				return false;
-			}
-
-		}
+		public abstract Student build();
 
 		public void setStudentRoll(int studentRoll) {
 			if (studentRoll >= 1) {
