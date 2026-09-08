@@ -21,20 +21,6 @@ public class TuitionFee implements Payable {
 	}
 
 	@Override
-	public boolean processPayment(String paymentMode) {
-		if (paymentMode.equalsIgnoreCase("CASH") || paymentMode.equalsIgnoreCase("UPI")
-				|| paymentMode.equalsIgnoreCase("CARD")) {
-			System.out.println("Processing payment......");
-			System.out.println("Payment Successful");
-			return true;
-		} else {
-			System.err.println("Something went wrong");
-			return false;
-		}
-
-	}
-
-	@Override
 	public void generateReceipt() {
 		System.out.println("***************** Generating Tuition Fees Receipt *****************");
 		System.out.println("Base Fees : " + baseFees);
@@ -47,7 +33,7 @@ public class TuitionFee implements Payable {
 	@Override
 	public double getDiscount() {
 
-		return (scholarshipDeduction+earlyPaymentDiscount);
+		return (scholarshipDeduction + earlyPaymentDiscount);
 	}
 
 }

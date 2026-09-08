@@ -20,20 +20,6 @@ public class LibraryFee implements Payable {
 	}
 
 	@Override
-	public boolean processPayment(String paymentMode) {
-		if (paymentMode.equalsIgnoreCase("CASH") || paymentMode.equalsIgnoreCase("UPI")
-				|| paymentMode.equalsIgnoreCase("CARD")) {
-			System.out.println("Processing payment......");
-			System.out.println("Payment Successful");
-			return true;
-		} else {
-			System.err.println("Something went wrong");
-			return false;
-		}
-
-	}
-
-	@Override
 	public void generateReceipt() {
 		System.out.println("***************** Generating Library Fees Receipt *****************");
 		System.out.println("Basic Subscription : " + basicSubscription);
