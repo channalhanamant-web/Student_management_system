@@ -6,7 +6,7 @@ public interface Payable {
 
 	public default boolean processPayment(String paymentMode) {
 		if (paymentMode.equalsIgnoreCase("CASH") || paymentMode.equalsIgnoreCase("UPI")
-				|| paymentMode.equalsIgnoreCase("CARD")) {
+				|| paymentMode.equalsIgnoreCase("CARD") || paymentMode.equalsIgnoreCase("BITCOIN")) {
 			System.out.println("Processing payment......");
 			System.out.println("Payment Successful");
 			return true;

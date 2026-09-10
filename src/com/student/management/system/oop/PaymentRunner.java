@@ -24,7 +24,7 @@ public class PaymentRunner {
 
 		Payable payable4 = new LibraryFee(500, 200, 100);
 		payable4.calculatePayment();
-		payable2.processPayment("LOAN");
+		payable2.processPayment("BITCOIN");
 		payable4.generateReceipt();
 		System.out.println(payable4.getDiscount());
 
