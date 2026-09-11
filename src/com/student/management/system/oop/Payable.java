@@ -4,11 +4,10 @@ public interface Payable {
 
 	public abstract double calculatePayment();
 
-	public default boolean processPayment(String paymentMode) {
-		if (paymentMode.equalsIgnoreCase("CASH") || paymentMode.equalsIgnoreCase("UPI")
-				|| paymentMode.equalsIgnoreCase("CARD") || paymentMode.equalsIgnoreCase("BITCOIN")) {
+	public default boolean processPayment(PaymentMode paymentMode) {
+		if (paymentMode == PaymentMode.BITCOIN || paymentMode==PaymentMode.CARD || paymentMode==PaymentMode.CASH || paymentMode==PaymentMode.UPI) {
 			System.out.println("Processing payment......");
-			System.out.println("Payment Successful");
+			System.out.println("Payment Successful with "+ paymentMode);
 			return true;
 		} else {
 			System.err.println("Something went wrong");
