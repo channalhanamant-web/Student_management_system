@@ -9,6 +9,14 @@ public class PaymentRunner {
 		payable.processPayment(PaymentMode.BITCOIN);
 		payable.generateReceipt();
 		System.out.println(payable.getDiscount());
+		System.out.println(PaymentMode.BITCOIN.getDescription());
+
+		System.out.println(PaymentMode.BITCOIN.ordinal());
+		System.out.println(PaymentMode.valueOf("CARD"));
+		PaymentMode modes[] = PaymentMode.values();
+		for (PaymentMode paymentMode : modes) {
+			System.out.println(paymentMode);
+		}
 
 		Payable payable2 = new SportsActivityFee(5000, 3000, 2000, 1000);
 		payable2.calculatePayment();
@@ -20,7 +28,7 @@ public class PaymentRunner {
 		payable3.calculatePayment();
 		payable2.processPayment(PaymentMode.CASH);
 		payable3.generateReceipt();
-		System.out.println(payable3.getDiscount()); 
+		System.out.println(payable3.getDiscount());
 
 		Payable payable4 = new LibraryFee(500, 200, 100);
 		payable4.calculatePayment();
