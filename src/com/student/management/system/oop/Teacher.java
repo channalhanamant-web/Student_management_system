@@ -1,5 +1,10 @@
 package com.student.management.system.oop;
 
+import com.student.management.system.exceptions.InvalidAddressException;
+import com.student.management.system.exceptions.InvalidAgeException;
+import com.student.management.system.exceptions.InvalidEmpIdException;
+import com.student.management.system.exceptions.InvalidSubjectException;
+
 public final class Teacher extends Person {
 
 	private String employeeId;
@@ -30,7 +35,14 @@ public final class Teacher extends Person {
 		if (age >= 21 && age <= 60) {
 			return true;
 		} else {
-			System.err.println("Invalid teacher age");
+			try {
+				throw new InvalidAgeException("Teacher age must be between 21 to 60");
+
+			} catch (InvalidAgeException e) {
+				System.err.println(e.getMessage());
+				System.err.println(e.getStackTrace());
+			}
+
 			return false;
 
 		}
@@ -47,11 +59,17 @@ public final class Teacher extends Person {
 	}
 
 	public boolean validateAddres(String address) {
-		if (!address.isEmpty()) {
-			return true;
-		} else {
-			System.err.println("Invalid teacher address");
+		if (address.isEmpty() || address == null) {
+			try {
+				throw new InvalidAddressException("Address can't be Empty or Null");
+			} catch (InvalidAddressException e) {
+				System.err.println(e.getMessage());
+				System.err.println(e.getStackTrace());
+			}
 			return false;
+		} else {
+
+			return true;
 
 		}
 	}
@@ -60,18 +78,32 @@ public final class Teacher extends Person {
 		if (employeeId.matches("T\\d{3}")) {
 			return true;
 		} else {
-			System.err.println("Invalid teacher Employee Id ");
+			try {
+				throw new InvalidEmpIdException("Employee ID must be 3 digits");
+			} catch (InvalidEmpIdException e) {
+				System.err.println(e.getMessage());
+				System.err.println(e.getStackTrace());
+
+			}
+
 			return false;
 
 		}
 	}
 
 	public boolean validateSubject(String subject) {
-		if (!subject.isEmpty()) {
-			return true;
-		} else {
-			System.err.println("Invalid subject");
+		if (subject.isEmpty()) {
+			try {
+				throw new InvalidSubjectException("Subject can't be empty");
+
+			} catch (InvalidSubjectException e) {
+				System.err.println(e.getMessage());
+				System.err.println(e.getStackTrace());
+			}
 			return false;
+		} else {
+
+			return true;
 		}
 	}
 

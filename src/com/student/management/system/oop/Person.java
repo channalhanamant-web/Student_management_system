@@ -1,5 +1,8 @@
 package com.student.management.system.oop;
 
+import com.student.management.system.exceptions.InvalidAddressException;
+import com.student.management.system.exceptions.InvalidContactNumberException;
+
 public abstract class Person {
 
 	protected String name;
@@ -64,18 +67,32 @@ public abstract class Person {
 		if (contactNumber.matches("\\d{10}")) {
 			return true;
 		} else {
-			System.err.println("Invalid contact number");
+			try {
+				throw new InvalidContactNumberException("Contact number need to be 10 digit numbers");
+			} catch (InvalidContactNumberException e) {
+				System.err.println(e.getMessage());
+				System.err.println(e.getStackTrace());
+			}
+
 			return false;
+
 		}
 
 	}
 
 	private boolean validateAddress(String address) {
-		if (!address.isEmpty() || address == null) {
-			return true;
-		} else {
-			System.err.println("Invalid address");
+		if (address.isEmpty() || address == null) {
+			try {
+				throw new InvalidAddressException("Address can't be Empty or Null");
+			} catch (InvalidAddressException e) {
+				System.err.println(e.getMessage());
+				System.err.println(e.getStackTrace());
+			}
 			return false;
+
+		} else {
+
+			return true;
 		}
 	}
 

@@ -1,6 +1,10 @@
 package com.student.management.system.oop;
 
+import java.nio.InvalidMarkException;
 import java.util.Objects;
+
+import com.student.management.system.exceptions.InvalidAgeException;
+import com.student.management.system.exceptions.InvalidMarksException;
 
 public abstract class Student extends Person {
 
@@ -20,7 +24,7 @@ public abstract class Student extends Person {
 		this.marksObtainedInScience = studentBuilder.marksObtainedInScience;
 		this.marksObtainedInMaths = studentBuilder.marksObtainedInMaths;
 		totalMarks = calculateTotalmarks();
-		
+
 		studentCount++;
 	}
 
@@ -59,17 +63,6 @@ public abstract class Student extends Person {
 
 	public double getMarksObtainedInMaths() {
 		return marksObtainedInMaths;
-	}
-
-	public boolean validateMarks(Double marksForTheSubject) {
-		if (marksForTheSubject >= 100 || marksForTheSubject < 0) {
-			System.err.println(marksForTheSubject + " is invalid marks!");
-			return false;
-		} else {
-
-			return true;
-
-		}
 	}
 
 	public String getStudentGrade() {
@@ -268,8 +261,31 @@ public abstract class Student extends Person {
 			if (age < 21 && age >= 10) {
 				return true;
 			} else {
-				System.err.println("Invalid age");
+				try {
+					throw new InvalidAgeException("Student age must be between 10 to 21");
+
+				} catch (InvalidAgeException e) {
+					System.err.println(e.getMessage());
+					System.err.println(e.getStackTrace());
+				}
+
 				return false;
+			}
+		}
+
+		private boolean validateMarks(Double marksForTheSubject) {
+			if (marksForTheSubject >= 100 || marksForTheSubject < 0) {
+				try {
+					throw new InvalidMarksException("Marks obtained by student must be between 0 to 100");
+				} catch (InvalidMarksException e) {
+					System.err.println(e.getMessage());
+					System.err.println(e.getStackTrace());
+				}
+				return false;
+			} else {
+
+				return true;
+
 			}
 		}
 
@@ -310,17 +326,24 @@ public abstract class Student extends Person {
 		}
 
 		public StudentBuilder withMarksObtainedInEnglish(double marksObtainedInEnglish) {
-			this.marksObtainedInEnglish = marksObtainedInEnglish;
+			if (validateMarks(marksObtainedInEnglish)) {
+				this.marksObtainedInEnglish = marksObtainedInEnglish;
+			}
 			return this;
 		}
 
 		public StudentBuilder withMarksObtainedInScience(double marksObtainedInScience) {
-			this.marksObtainedInScience = marksObtainedInScience;
+			if (validateMarks(marksObtainedInScience)) {
+				this.marksObtainedInScience = marksObtainedInScience;
+			}
 			return this;
 		}
 
 		public StudentBuilder withMarksObtainedInMaths(double marksObtainedInMaths) {
-			this.marksObtainedInMaths = marksObtainedInMaths;
+			if (validateMarks(marksObtainedInMaths)) {
+				this.marksObtainedInMaths = marksObtainedInMaths;
+			}
+
 			return this;
 		}
 
