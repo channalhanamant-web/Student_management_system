@@ -14,7 +14,7 @@ public class SportsStudent extends Student {
 	
 	@Override
 	public String toString() {
-		return "SportsStudent [SportsScore" + sportsScore + ", totalMarks=" + totalMarks + ", percentage=" + percentage
+		return "SportsStudent [SportsScore=" + sportsScore + ", totalMarks=" + totalMarks + ", percentage=" + percentage
 				+ ", studentGrade=" + studentGrade + ", name=" + name + ", age=" + age + ", contactNumber="
 				+ contactNumber + ", address=" + address + "]";
 	}
