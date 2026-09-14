@@ -1,10 +1,14 @@
 package com.student.management.system.oop;
 
+import java.io.Serializable;
+
 import com.student.management.system.exceptions.InvalidAddressException;
 import com.student.management.system.exceptions.InvalidContactNumberException;
 
-public abstract class Person {
+public abstract class Person implements Serializable{
 
+
+	private static final long serialVersionUID = 1L;
 	protected String name;
 	protected int age;
 	protected String contactNumber;
