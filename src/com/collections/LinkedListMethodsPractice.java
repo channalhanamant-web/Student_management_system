@@ -7,7 +7,7 @@ import java.util.List;
 public class LinkedListMethodsPractice {
 
 	public static void main(String[] args) {
-		List<String> linkedList = new LinkedList<String>();
+		LinkedList<String> linkedList = new LinkedList<String>();
 
 		linkedList.add(null);
 		linkedList.add("Hanii");
@@ -41,6 +41,39 @@ public class LinkedListMethodsPractice {
 
 		linkedList.forEach(x -> System.out.print(x));
 		linkedList.forEach(System.out::println);
+		
+		linkedList.addFirst("My");
+		linkedList.addLast("last");
+		System.out.println(linkedList);
+		
+		System.out.println(linkedList.getFirst());
+		
+		System.out.println(linkedList.offerFirst("first"));
+		System.out.println(linkedList.pollFirst());
+		System.out.println(linkedList.pollLast());
+		
+		
+		System.out.println(linkedList.peekFirst());
+		
+		linkedList.push("pushing");
+		linkedList.pop();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }
