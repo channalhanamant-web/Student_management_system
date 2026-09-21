@@ -1,5 +1,11 @@
 package com.student.management.system.oop.helpdesk;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -8,6 +14,10 @@ public class HelpdeskManager {
 	private static LinkedList<HelpDeskRequest> requestQueue = new LinkedList<HelpDeskRequest>();
 	private static LinkedList<HelpDeskRequest> processedQueue = new LinkedList<HelpDeskRequest>();
 	private static LinkedList<HelpDeskRequest> cancelledQueue = new LinkedList<HelpDeskRequest>();
+
+	static {
+		loadListFromFile();
+	}
 
 	public static void createNewRequest(Scanner scanner) {
 		System.out.println("Enter Student Name");
@@ -57,6 +67,7 @@ public class HelpdeskManager {
 
 		HelpDeskRequest helpDeskRequest = new HelpDeskRequest(studentName, studentRollNumber, issueType, description);
 		requestQueue.addLast(helpDeskRequest);
+		saveListInfoFile(requestQueue, "active");
 
 		System.out.println("Request created successfully");
 		System.out.println("Ticket number - : " + helpDeskRequest.getTicketId());
@@ -119,6 +130,8 @@ public class HelpdeskManager {
 		HelpDeskRequest helpDeskRequest = new HelpDeskRequest(studentName, studentRollNumber, issueType, description);
 		requestQueue.addFirst(helpDeskRequest);
 
+		saveListInfoFile(requestQueue, "active_Priority");
+
 		System.out.println("Priority Request created successfully");
 		System.out.println("Ticket number - : " + helpDeskRequest.getTicketId());
 		System.out.println("Student Name - : " + helpDeskRequest.getStudentName());
@@ -131,10 +144,14 @@ public class HelpdeskManager {
 
 	public static void processRequest() {
 		HelpDeskRequest headRequest = requestQueue.poll();
+		saveListInfoFile(requestQueue, "active");
 		headRequest.setStatus(Status.CLOSE);
 		System.out.println("Ticket closed successfully.. " + headRequest.getTicketId());
 		System.out.println(headRequest);
 		processedQueue.add(headRequest);
+
+		saveListInfoFile(processedQueue, "processed");
+
 	}
 
 	public static void cancelRequestByTicket(String ticketId) {
@@ -150,8 +167,11 @@ public class HelpdeskManager {
 		}
 		if (requestIndexFoundAt != -1) {
 			HelpDeskRequest cancelledRequest = requestQueue.remove(requestIndexFoundAt);
+			saveListInfoFile(requestQueue, "active");
 			cancelledRequest.setStatus(Status.CANCEL);
 			cancelledQueue.add(cancelledRequest);
+
+			saveListInfoFile(cancelledQueue, "cancelled");
 
 			System.out.println("Request cancelled successfully");
 			System.out.println("Ticket number - : " + cancelledRequest.getTicketId());
@@ -234,5 +254,67 @@ public class HelpdeskManager {
 
 			System.out.println("================================================================================");
 		}
+	}
+
+	private static void saveListInfoFile(LinkedList<HelpDeskRequest> listRef, String fileName) {
+		File file = new File(fileName + ".ser");
+		FileOutputStream fileOutputStream;
+		ObjectOutputStream objectOutputStream;
+		try {
+			fileOutputStream = new FileOutputStream(file);
+			objectOutputStream = new ObjectOutputStream(fileOutputStream);
+			objectOutputStream.writeObject(listRef);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		System.out.println("Data added to the file " + fileName + ".ser");
+	}
+
+	private static void loadListFromFile() {
+		File activeFile = new File("active.ser");
+		File cancelledRequestFile = new File("cancelled.ser");
+		File processedRequestFile = new File("processed.ser");
+
+		ObjectInputStream objectInputStreamActive, objectInputStreamCancelled, objectInputStreamProcessed;
+		FileInputStream fileInputStreamActive, fileInputStreamProcessed, fileInputStreamCancelled;
+
+		if (activeFile.exists()) {
+			try {
+
+				fileInputStreamActive = new FileInputStream(activeFile);
+				objectInputStreamActive = new ObjectInputStream(fileInputStreamActive);
+				requestQueue = (LinkedList<HelpDeskRequest>) objectInputStreamActive.readObject();
+				System.out.println("Loaded data from the Active.ser ");
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		if (processedRequestFile.exists()) {
+			try {
+
+				fileInputStreamProcessed = new FileInputStream(processedRequestFile);
+				objectInputStreamProcessed = new ObjectInputStream(fileInputStreamProcessed);
+				processedQueue = (LinkedList<HelpDeskRequest>) objectInputStreamProcessed.readObject();
+				System.out.println("Loaded data from the Processed.ser ");
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (cancelledRequestFile.exists()) {
+			try {
+
+				fileInputStreamCancelled = new FileInputStream(cancelledRequestFile);
+				objectInputStreamCancelled = new ObjectInputStream(fileInputStreamCancelled);
+				requestQueue = (LinkedList<HelpDeskRequest>) objectInputStreamCancelled.readObject();
+
+				System.out.println("Loaded data from the Cancelled.ser ");
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
+		}
+
 	}
 }
