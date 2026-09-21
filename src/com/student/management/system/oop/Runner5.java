@@ -20,22 +20,30 @@ public class Runner5 {
 			System.out.println("No backup (student.ser) found...... ");
 		}
 
-		System.out.println("------------------------------ Main Menu ------------------------------");
-		System.out.println("1. Enroll a new Student");
-		System.out.println("2. Exit");
-		System.out.println("Select an option");
-		int option = scanner.nextInt();
-		scanner.nextLine();
+		while (true) {
+			System.out.println("------------------------------ Main Menu ------------------------------");
+			System.out.println("1. Enroll a new Student");
+			System.out.println("2. Help Desk");
+			System.out.println("3. Exit");
+			System.out.println("Select an option");
+			int option = scanner.nextInt();
+			scanner.nextLine();
 
-		switch (option) {
-		case 1:
-			StudentManager.enrollStudent(scanner);
-			break;
-		case 2:
-			System.out.println("Good Bye");
-			System.exit(0);
+			switch (option) {
+			case 1:
+				StudentManager.enrollStudent(scanner);
+				break;
+			case 2:
+				// Helpdesk Runner
+				break;
+			case 3:
+				System.out.println("Good Bye");
+				System.exit(0);
+			default:
+				System.out.println("Enter valid option between 1-3");
+			}
+
 		}
-
 	}
 
 }
