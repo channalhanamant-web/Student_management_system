@@ -1,10 +1,12 @@
 package com.student.management.system.oop.helpdesk;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-public class HelpDeskRequest {
+public class HelpDeskRequest implements Serializable {
+	private long serialVersionUID = 1L;
 	private String ticketId;
 	private String studentName;
 	private int rollNumber;
@@ -25,58 +27,38 @@ public class HelpDeskRequest {
 		ticketId = uuid.toString();
 
 	}
-	
-	
 
-	
 	public String getTicketId() {
 		return ticketId;
 	}
-
-
-
 
 	public String getStudentName() {
 		return studentName;
 	}
 
-
-
-
 	public int getRollNumber() {
 		return rollNumber;
 	}
-
-
-
 
 	public IssueType getIssueType() {
 		return issueType;
 	}
 
-
-
-
 	public String getDescription() {
 		return description;
 	}
-
-
-
 
 	public String getRaisedTime() {
 		return formatTime(raisedTime);
 	}
 
-
-
-
 	public Status getStatus() {
 		return status;
 	}
 
-
-
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {

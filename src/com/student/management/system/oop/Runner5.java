@@ -3,6 +3,7 @@ package com.student.management.system.oop;
 import java.io.File;
 import java.util.Scanner;
 
+import com.student.management.system.oop.helpdesk.HelpDeskRunner;
 import com.student.management.system.oop.student.management.StudentManager;
 
 public class Runner5 {
@@ -25,7 +26,7 @@ public class Runner5 {
 			System.out.println("1. Enroll a new Student");
 			System.out.println("2. Help Desk");
 			System.out.println("3. Exit");
-			System.out.println("Select an option");
+			System.out.println("Select an option [1-3]");
 			int option = scanner.nextInt();
 			scanner.nextLine();
 
@@ -34,7 +35,7 @@ public class Runner5 {
 				StudentManager.enrollStudent(scanner);
 				break;
 			case 2:
-				// Helpdesk Runner
+				HelpDeskRunner.showHelpDeskMenu();
 				break;
 			case 3:
 				System.out.println("Good Bye");
