@@ -1,4 +1,4 @@
-package com.collections;
+package com.collections.List;
 
 public class Contact {
 
