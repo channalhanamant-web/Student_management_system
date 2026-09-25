@@ -1,5 +1,6 @@
 package com.collections.Set;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -46,7 +47,10 @@ public class SetMethodsDemo {
 		System.out.println(treeSet.remove("Jatin"));
 		System.out.println(treeSet);
 		
-		
+		//Set doesn't have get method but we can convert set into list and we can get the element from specific index
+		ArrayList<String> arrayList=new ArrayList<String>(hashSet);
+		System.out.println("I Am From Array List "+arrayList);
+		System.out.println(arrayList.get(1));
 		
 		
 		
